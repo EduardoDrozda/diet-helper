@@ -1,0 +1,24 @@
+{
+  "name": "diet-helper.api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/diet-helper.api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "diet-helper.api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "diet-helper.api:build:development"
+        },
+        "production": {
+          "buildTarget": "diet-helper.api:build:production"
+        }
+      }
+    }
+  }
+}
