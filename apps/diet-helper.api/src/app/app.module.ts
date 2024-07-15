@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { join } from 'path';
-import * as Joi from 'joi';
+import Joi from 'joi';
 @Module({
   imports: [ConfigModule.forRoot({
     envFilePath: [
