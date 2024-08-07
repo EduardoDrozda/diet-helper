@@ -14,6 +14,7 @@
       "@application/*": ["./src/app/application/*"],
       "@infrastructure/*": ["./src/app/infrastructure/*"],
       "@presentation/*": ["./src/app/presentation/*"],
+      "@shared/*": ["./src/app/shared/*"]
     }
   },
   "exclude": [

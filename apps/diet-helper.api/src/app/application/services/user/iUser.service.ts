@@ -3,5 +3,5 @@ import { User } from '@domain/entities';
 
 export interface IUserService {
   create(data: CreateUserDTO): Promise<GetUserDTO>;
-  findById(id: string): Promise<void>;
+  findById(id: string): Promise<GetUserDTO>;
 }

@@ -3,7 +3,7 @@ import { Knex, knex as setupKnex } from 'knex';
 import { join } from 'path';
 
 dotenv.config({
-  path: join(__dirname, '..', '..', '..', '.env'),
+  path: join(__dirname, '..', '..', '..', '..', '.env'),
 });
 
 export const config: Knex.Config = {

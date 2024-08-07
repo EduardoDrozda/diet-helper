@@ -19,15 +19,22 @@ export class UserService implements IUserService {
       throw new BadRequestException('User already exists');
     }
 
-    const { id } = await this.userRepository.create(data);
+    const { name, email, password } = data;
 
-    const { name, email } = data;
+    const { id, created_at, updated_at } = await this.userRepository.create({
+      name,
+      email,
+      password,
+    });
 
-    return { id, name, email };
+    return { id, name, email, created_at, updated_at };
   }
 
-  async findById(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async findById(id: string): Promise<GetUserDTO> {
+    const { email, name, created_at, updated_at } =
+      await this.userRepository.findById(id);
+
+    return { id, email, name, created_at, updated_at };
   }
 
   private async findByEmail(email: string): Promise<User> {

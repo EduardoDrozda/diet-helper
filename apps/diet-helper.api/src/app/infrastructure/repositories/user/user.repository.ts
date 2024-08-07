@@ -1,29 +1,31 @@
 import { User } from '@domain/entities';
 import { IUserRepository } from '@domain/repositories';
+import { knex } from '@infrastructure/database';
+import { Knex } from 'knex';
 
 export const USER_REPOSITORY = Symbol('UserRepository');
 
 export class UserRepository implements IUserRepository {
-  private users: User[] = [];
+  private readonly knex: Knex;
 
-  async create(user: Pick<User, 'name' | 'email' | 'password'>): Promise<User> {
-    const newUser = {
+  constructor() {
+    this.knex = knex;
+  }
+
+  async create(user: Pick<User, 'name' | 'email' | 'password'>): Promise<any> {
+    const [{ id }] = await this.knex('users').insert(user).returning('id');
+
+    return {
       ...user,
-      id: String(this.users.length + 1),
-      created_at: new Date().toDateString(),
-      updated_at: new Date().toDateString(),
+      id,
     };
-
-    this.users.push(newUser);
-
-    return newUser;
   }
 
   async findById(id: string): Promise<User | null> {
-    return this.users.find((user) => user.id === id) || null;
+    return this.knex('users').where('id', id).first();
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.users.find((user) => user.email === email) || null;
+    return this.knex('users').where('email', email).first();
   }
 }
